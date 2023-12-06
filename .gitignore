@@ -1,3 +1,6 @@
 venv*
 all_script.py
 notebooks/xgb_models/*
+notebooks/lstm_models/*
+notebooks/data_for_main_model/*
+notebooks/data_distance_from_Lodz/*
