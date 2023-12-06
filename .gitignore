@@ -1,5 +1,5 @@
 venv*
-all_script.py
+all_script_for_wsl.py
 notebooks/xgb_models/*
 notebooks/lstm_models/*
 notebooks/data_for_main_model/*
