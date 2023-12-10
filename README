@@ -1,0 +1,4 @@
+# Notebook for 3 lstm mondels generation with bias addidtion in  notebooks\LSTM_model_for_each_30_min.ipynb path
+# 3 .pkl models will be returned with biases
+
+# also .pkl file for data transformations will be added "mean_and_std.pkl"
