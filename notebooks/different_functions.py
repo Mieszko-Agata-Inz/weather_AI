@@ -1,3 +1,7 @@
+###################################################################################################################
+############## Script with functions common for all in root/notebooks folder LSTM model notebooks #################
+###################################################################################################################
+
 import matplotlib.pyplot as plt
 import numpy as np
 from tensorflow.keras.models import Sequential
