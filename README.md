@@ -1,6 +1,24 @@
 # Data in "notebooks" folder
 
-## .ipynb files
+## folders
+
+### data_distance_from_Lodz
+
+Folder with .csv files for making comparisons beetwen predictions for each city.
+
+### data_for_main_model
+
+Data from Łódź city for training and updating LSTM model. And combined data from Warszawa, Wrocław, Szczecin, Rzeszów for XGBoost model.
+
+### lstm_models
+
+.pkl files with lstm models - there is no data - first execute LSTM_model_for_each_30_min.ipynb notebook
+
+### xgb_models
+
+.pkl files with xgb models - there is no data - first execute XGB_model.ipynb notebook
+
+## Jupyter Notebook .ipynb files
 
 ### data_preprocessing.ipynb
 
@@ -38,29 +56,15 @@ Then the comparison with basic model - without updates - is being made.
 Comparison of predictions for different polish cities. LSTM model is being learned on only from Łódź city data.
 Comparisons are being made with bias inclusion for LSTM and xGBoost models.
 
+Attention: file depends on lstm_models and xgb_models folders. First execute XGB_model.ipynb and LSTM_model_for_each_30_min.ipynb notebooks.
+
 ### linear_regression.ipynb
 
 Old notebook - it was used to generate results which compare LSTM with naive method and linear regression. Results are being saved in MSE_error_for_lstm_and_naive_method_comparison.txt file.
 
-## folders
+Adnotation: notebook needs to be updated
 
-### data_distance_from_Lodz
-
-Folder with .csv files for making comparisons beetwen predictions for each city. - it needs to be updated with new folders structure!
-
-### data_for_main_model
-
-Data for training and updating from Łódź.
-
-### lstm_models
-
-.pkl files with lstm models - there is no data - will be added in the nearest future to generate automatically!
-
-### xgb_models
-
-.pkl files with xgb models - there is no data - will be added in the nearest future to generate automatically!
-
-## .py file
+## Python .py file
 
 ### different_functions.py
 

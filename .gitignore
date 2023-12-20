@@ -1,3 +1,5 @@
 venv*
-all_script_for_wsl.py
+script_for_wsl.py
 *.pkl
+*/xgb_models/*
+*/lstm_models/*
