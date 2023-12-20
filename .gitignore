@@ -1,5 +1,6 @@
 venv*
 script_for_wsl.py
 *.pkl
-*/xgb_models/*
-*/lstm_models/*
+*/xgb_models/biases_lstm
+*/lstm_models/mean_and_std
+*/lstm_models/biases_lstm
