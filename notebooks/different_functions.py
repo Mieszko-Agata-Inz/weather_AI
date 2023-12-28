@@ -109,7 +109,7 @@ def LSTM_model(
     learning_rate=0.001,
     window_size=6,
     batch_size=32,
-    shuffle=True,
+    shuffle=False,
 ):
     model = Sequential()
     model.add(InputLayer((window_size, 3)))
