@@ -16,7 +16,18 @@ import numpy as np
 
 # function to train lstm model for predictions for first hour
 # returns trained model
-# params:
+#
+# input params:
+# X_train : training input set
+# y_train : training set, true values
+# X_val : validation input set
+# y_val : validation set, true values
+# epochs=10 : number of epochs for model
+# learning_rate=0.001 : number of learning rate
+# batch_size=64 : size of batch
+# shuffle=False : should be data shuffled
+# window_size=12 : number of timestamps in the window
+# weather_components_size=3 : how many weather components to predict
 def LSTM_model1(
     X_train,
     y_train,
@@ -62,7 +73,18 @@ def LSTM_model1(
 
 # function to train lstm model for predictions for second hour
 # returns trained model
-# params:
+#
+# input params:
+# X_train : training input set
+# y_train : training set, true values
+# X_val : validation input set
+# y_val : validation set, true values
+# epochs=10 : number of epochs for model
+# learning_rate=0.001 : number of learning rate
+# batch_size=64 : size of batch
+# shuffle=False : should be data shuffled
+# window_size=12 : number of timestamps in the window
+# weather_components_size=3 : how many weather components to predict
 def LSTM_model2(
     X_train,
     y_train,
@@ -109,7 +131,18 @@ def LSTM_model2(
 
 # function to train lstm model for predictions for third hour
 # returns trained model
-# params:
+#
+# input params:
+# X_train : training input set
+# y_train : training set, true values
+# X_val : validation input set
+# y_val : validation set, true values
+# epochs=10 : number of epochs for model
+# learning_rate=0.001 : number of learning rate
+# batch_size=64 : size of batch
+# shuffle=False : should be data shuffled
+# window_size=12 : number of timestamps in the window
+# weather_components_size=3 : how many weather components to predict
 def LSTM_model3(
     X_train,
     y_train,
@@ -157,7 +190,13 @@ def LSTM_model3(
 
 
 # function for min max normalization
-# params:
+#
+# input params:
+# X : input set for making predictions on
+# y : exact values to compare with predictions
+# index : index of column to normalize data in
+# min : minimal values of data training set
+# max : maximal values of data training set
 def min_max_normalize(X, y, index, max, min):
     X[:, :, index] = (X[:, :, index] - min) / (max - min)
     y[:, index] = (y[:, index] - min) / (max - min)
@@ -165,7 +204,11 @@ def min_max_normalize(X, y, index, max, min):
 
 
 # function for min max denormalization
-# params:
+#
+# input params:
+# y : values of predictions
+# min : minimal values of data training set
+# max : maximal values of data training set
 def min_max_denormalization(y, max, min):
     y = y * (max - min) + min
     return y
@@ -174,7 +217,15 @@ def min_max_denormalization(y, max, min):
 # function for transform data based on window size for model input data and timestamp which to predict
 # data is being normalized with min_max_normalize function, which is important to notice
 # returns explanatory X and response y variables
-# params:
+#
+# input params:
+# df : dataframe with data to transform
+# max=0 : maximal values of data training set
+# min=0 : minimal values of data training set
+# window_size=12 : number of timestamps in the window
+# timestamps_count=0,
+# is_update=False : bool value is it data for update the LSTM models
+# for_linear_regression=False : bool value if is it data for linear regression algorithm
 def transform_data(
     df,
     max=0,
@@ -216,7 +267,13 @@ def transform_data(
 # function makes predictions
 # predictions are being denormalized
 # returns predicted and actual values
-# params:
+#
+# input params:
+# model
+# X : input set for making predictions on
+# y : exact values to compare with predictions
+# min : minimal values of data training set
+# max : maximal values of data training set
 def make_predictions(model, X, y, min, max):
     predictions = model.predict(X, verbose=0)
     weather_components_size = y.shape[1]
@@ -228,26 +285,3 @@ def make_predictions(model, X, y, min, max):
         actual.append(min_max_denormalization(y[:, i], max[i], min[i]))
 
     return pred, actual
-
-
-# USELESS (?)
-# def plot_predictions_and_actual(pred, actual, start=24, end=48):
-#     fig, axs = plt.subplots(4)
-#     fig.suptitle(
-#         "Weather parameters - red means predicted - x: number of input data , y: predicted value"
-#     )
-#     fig.tight_layout(pad=1.8)
-#     axs[0].plot(pred[0][start:end], "r")
-#     axs[0].plot(actual[0][start:end])
-#     axs[0].set_title("relative humidity [%]")
-
-#     axs[1].plot(pred[1][start:end], "r")
-#     axs[1].plot(actual[1][start:end])
-#     axs[1].set_title("speed of wind [km/h]")
-
-#     axs[2].plot(pred[2][start:end], "r")
-#     axs[2].plot(actual[2][start:end])
-#     axs[2].set_title("temperature")
-
-#     axs[3].plot(actual[2][:])
-#     axs[3].set_title("temperature [st C]")
