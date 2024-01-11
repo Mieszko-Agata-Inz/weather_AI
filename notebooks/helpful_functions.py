@@ -44,7 +44,7 @@ def LSTM_model1(
     model = Sequential()
     model.add(
         LSTM(
-            units=40,
+            units=54,
             batch_input_shape=(batch_size, window_size, weather_components_size),
             stateful=True,
             return_sequences=False,
@@ -103,7 +103,7 @@ def LSTM_model2(
     model = Sequential()
     model.add(
         LSTM(
-            units=40,
+            units=54,
             batch_input_shape=(batch_size, window_size, weather_components_size),
             stateful=True,
             return_sequences=False,
@@ -169,14 +169,6 @@ def LSTM_model3(
             return_sequences=False,
         )
     )
-    # model.add(
-    #     LSTM(
-    #         units=36,
-    #         batch_input_shape=(batch_size, window_size, weather_components_size),
-    #         stateful=True,
-    #         return_sequences=False,
-    #     )
-    # )
     model.add(Dense(3))
 
     # model compile with given values
