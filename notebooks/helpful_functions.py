@@ -1,5 +1,5 @@
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import LSTM, Dense, InputLayer, Dropout
+from tensorflow.keras.layers import LSTM, Dense, Dropout
 from tensorflow.keras.metrics import RootMeanSquaredError
 from tensorflow.keras.losses import MeanSquaredError
 from tensorflow.keras.optimizers import Adam
@@ -24,10 +24,14 @@ import numpy as np
 # y_val : validation set, true values
 # epochs=10 : number of epochs for model
 # learning_rate=0.001 : number of learning rate
-# batch_size=64 : size of batch
+# batch_size=32 : size of batch
 # shuffle=False : should be data shuffled
 # window_size=12 : number of timestamps in the window
 # weather_components_size=3 : how many weather components to predict
+#
+# output params:
+# model : trained model
+# history : history of training part
 def LSTM_model1(
     X_train,
     y_train,
@@ -87,6 +91,10 @@ def LSTM_model1(
 # shuffle=False : should be data shuffled
 # window_size=12 : number of timestamps in the window
 # weather_components_size=3 : how many weather components to predict
+#
+# output params:
+# model : trained model
+# history : history of training part
 def LSTM_model2(
     X_train,
     y_train,
@@ -147,6 +155,10 @@ def LSTM_model2(
 # shuffle=False : should be data shuffled
 # window_size=12 : number of timestamps in the window
 # weather_components_size=3 : how many weather components to predict
+#
+# output params:
+# model : trained model
+# history : history of training part
 def LSTM_model3(
     X_train,
     y_train,
@@ -198,11 +210,15 @@ def LSTM_model3(
 # function for min max normalization
 #
 # input params:
-# X : input set for making predictions on
+# X : input set for making predictions
 # y : exact values to compare with predictions
 # index : index of column to normalize data in
 # min : minimal values of data training set
 # max : maximal values of data training set
+#
+# output params:
+# X : modificated input set for making predictions
+# y : modificated exact values to compare with predictions
 def min_max_normalize(X, y, index, max, min):
     X[:, :, index] = (X[:, :, index] - min) / (max - min)
     y[:, index] = (y[:, index] - min) / (max - min)
@@ -215,6 +231,9 @@ def min_max_normalize(X, y, index, max, min):
 # y : values of predictions
 # min : minimal values of data training set
 # max : maximal values of data training set
+#
+# output params:
+# y : modificated values of predictions
 def min_max_denormalization(y, max, min):
     y = y * (max - min) + min
     return y
@@ -232,6 +251,10 @@ def min_max_denormalization(y, max, min):
 # timestamps_count=0,
 # is_update=False : bool value is it data for update the LSTM models
 # for_linear_regression=False : bool value if is it data for linear regression algorithm
+#
+# output params:
+# X : set for making predictions
+# y : exact values to compare with predictions
 def transform_data(
     df,
     max=0,
@@ -280,6 +303,10 @@ def transform_data(
 # y : exact values to compare with predictions
 # min : minimal values of data training set
 # max : maximal values of data training set
+#
+# output params:
+# pred : predicted values
+# actual : exact values
 def make_predictions(model, X, y, min, max):
     predictions = model.predict(
         X,
