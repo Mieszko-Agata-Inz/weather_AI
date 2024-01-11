@@ -6,7 +6,7 @@
 
 Preprocesses data from Łódź city and splits it for training, validation and testing sets.
 
-### Notebook 1: LSTM_model_different_windows_sizes_and_50epochs.ipynb
+### Notebook 1: LSTM_model_different_distances_beetwen_timesteps_and_50epochs.ipynb
 
 LSTM models fitting and evaluation.
 

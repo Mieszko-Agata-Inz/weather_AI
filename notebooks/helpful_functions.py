@@ -35,7 +35,7 @@ def LSTM_model1(
     y_val,
     epochs=10,
     learning_rate=0.001,
-    batch_size=64,
+    batch_size=32,
     shuffle=False,
     window_size=12,
     weather_components_size=3,
@@ -44,8 +44,10 @@ def LSTM_model1(
     model = Sequential()
     model.add(
         LSTM(
-            72,
+            units=40,
             batch_input_shape=(batch_size, window_size, weather_components_size),
+            stateful=True,
+            return_sequences=False,
         )
     )
     model.add(Dense(weather_components_size))
@@ -101,8 +103,10 @@ def LSTM_model2(
     model = Sequential()
     model.add(
         LSTM(
-            72,
+            units=40,
             batch_input_shape=(batch_size, window_size, weather_components_size),
+            stateful=True,
+            return_sequences=False,
         )
     )
     model.add(Dropout(0.1))
@@ -161,8 +165,18 @@ def LSTM_model3(
         LSTM(
             units=40,
             batch_input_shape=(batch_size, window_size, weather_components_size),
+            stateful=True,
+            return_sequences=False,
         )
     )
+    # model.add(
+    #     LSTM(
+    #         units=36,
+    #         batch_input_shape=(batch_size, window_size, weather_components_size),
+    #         stateful=True,
+    #         return_sequences=False,
+    #     )
+    # )
     model.add(Dense(3))
 
     # model compile with given values
@@ -275,7 +289,11 @@ def transform_data(
 # min : minimal values of data training set
 # max : maximal values of data training set
 def make_predictions(model, X, y, min, max):
-    predictions = model.predict(X, verbose=0)
+    predictions = model.predict(
+        X,
+        verbose=0,
+        batch_size=32,
+    )
     weather_components_size = y.shape[1]
     pred = []
     actual = []
