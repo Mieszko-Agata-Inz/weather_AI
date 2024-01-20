@@ -257,8 +257,8 @@ def min_max_denormalization(y, max, min):
 # y : exact values to compare with predictions
 def transform_data(
     df,
-    max=0,
-    min=0,
+    max,
+    min,
     window_size=12,
     timestamps_count=0,
     is_update=False,
